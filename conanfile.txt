@@ -1,0 +1,26 @@
+# Conan Package Manager manifest
+# JFrog CLI recognises this file to perform C++ SCA (Vulnerable Dependencies scan)
+#
+# Versions chosen to be compatible with Conan 2.x + cmake 4.x toolchain
+# while still carrying known CVEs for demo purposes:
+#
+#   openssl/3.0.9   → CVE-2023-0286, CVE-2023-2650, CVE-2023-3446
+#   zlib/1.2.13     → CVE-2023-45853 (heap buffer overflow)
+#   libpng/1.6.40   → CVE-2019-7317, older series with known issues
+#   libcurl/8.4.0   → CVE-2023-38545 (SOCKS5 heap overflow - critical)
+#   boost/1.82.0    → license obligations (BSL-1.0)
+
+[requires]
+openssl/3.0.9
+zlib/1.2.13
+libpng/1.6.40
+libcurl/8.4.0
+boost/1.82.0
+
+[generators]
+CMakeDeps
+CMakeToolchain
+
+[options]
+openssl*:shared=False
+zlib*:shared=False

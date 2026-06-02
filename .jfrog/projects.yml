@@ -1,0 +1,24 @@
+version: "2.0"
+
+# JFrog CLI Project Configuration
+# Docs: https://docs.jfrog.com/security/docs/run-snippet-detection
+
+scans:
+  - type: audit
+    # Source code scan with snippet detection enabled
+    source: "."
+    scanners:
+      - sca           # Software Composition Analysis (dependency scan)
+      - sbom          # Software Bill of Materials
+      - static-sca    # Static source code analysis
+      - snippet       # Snippet detection — finds copied open-source code
+
+    # Replace with your Xray watch name that has a security/license policy
+    # watches:
+    #   - my-security-watch
+
+    # Optional: specify output format
+    # output-format: json
+
+    # Optional: fail build on policy violation
+    # fail-no-op: true
