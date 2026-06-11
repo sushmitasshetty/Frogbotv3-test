@@ -1,21 +1,72 @@
-name: "Frogbot Scan Pull Request"
+# name: "Frogbot Scan Pull Request"
+# on:
+#   pull_request_target:
+#     types: [ opened, synchronize ]
+# permissions:
+#   pull-requests: write
+#   contents: read
+#   security-events: write
+#   # [Mandatory if using OIDC authentication protocol instead of JF_ACCESS_TOKEN]
+#   # id-token: write
+
+# jobs:
+#   scan-pull-request:
+#     runs-on: ubuntu-latest
+#     environment: frogbot
+#     steps:
+#       - uses: jfrog/frogbot@v3
+#         env:
+#           JF_URL: ${{ secrets.JF_URL }}
+#           JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
+#           JF_GIT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+name: "Frogbot General Scan"
+
 on:
+  push:
+    branches: ["main"]
   pull_request_target:
-    types: [ opened, synchronize ]
+    types: [opened, synchronize]
+
 permissions:
   pull-requests: write
-  contents: read
+  contents: write
   security-events: write
-  # [Mandatory if using OIDC authentication protocol instead of JF_ACCESS_TOKEN]
-  # id-token: write
 
 jobs:
-  scan-pull-request:
+
+  # ── Scan repository on push to main branch test the usecase ───────────────────────────────────────
+  frogbot-scan-repository:
     runs-on: ubuntu-latest
     environment: frogbot
+    if: github.event_name == 'push'
     steps:
-      - uses: jfrog/frogbot@v3
+      - uses: actions/checkout@v4          # ← ADD THIS
+
+      - name: Run Frogbot Scan Repository
+        uses: jfrog/frogbot@v3
         env:
           JF_URL: ${{ secrets.JF_URL }}
           JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
-          JF_GIT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          JF_GIT_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
+          JFROG_CLI_LOG_LEVEL: DEBUG
+
+  # ── Scan pull requests ─────────────────────────────────────────────────────
+  frogbot-scan-pull-request:
+    runs-on: ubuntu-latest
+    environment: frogbot
+    if: github.event_name == 'pull_request_target'
+    steps:
+      - uses: actions/checkout@v4          # ← ADD THIS
+        with:
+          ref: ${{ github.event.pull_request.base.ref }}   # ← base branch only, NOT head
+
+      - name: Run Frogbot Scan Pull Request
+        uses: jfrog/frogbot@v3
+        env:
+          JF_URL: ${{ secrets.JF_URL }}
+          JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
+          JF_GIT_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
+          JF_GIT_BASE_BRANCH: ${{ github.event.pull_request.base.ref }}
+          JFROG_CLI_LOG_LEVEL: DEBUG
+
