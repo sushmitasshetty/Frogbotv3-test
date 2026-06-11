@@ -13,6 +13,9 @@
 [requires]
 openssl/3.0.9
 zlib/1.2.13
+libpng/1.6.40
+libcurl/8.4.0
+boost/1.82.0
 
 [generators]
 CMakeDeps
