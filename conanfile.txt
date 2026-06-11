@@ -12,7 +12,6 @@
 
 [requires]
 openssl/3.0.9
-zlib/1.2.13
 
 [generators]
 CMakeDeps
