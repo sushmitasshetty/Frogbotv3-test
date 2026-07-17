@@ -8,7 +8,7 @@
 #   zlib/1.2.13     → CVE-2023-45853 (heap buffer overflow)
 #   libpng/1.6.40   → CVE-2019-7317, older series with known issues
 #   libcurl/8.4.0   → CVE-2023-38545 (SOCKS5 heap overflow - critical)
-#   boost/1.82.0    → license obligations (BSL-1.0)
+#   boost/1.82.0    → license obligations (BSL-1.0) - Test
 
 [requires]
 openssl/3.0.9
