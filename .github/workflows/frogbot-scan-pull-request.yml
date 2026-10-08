@@ -51,6 +51,7 @@ jobs:
           JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
           JF_GIT_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
           JFROG_CLI_LOG_LEVEL: DEBUG
+          JF_WATCHES: sss-frogbot-test2
 
   # ── Scan pull requests ─────────────────────────────────────────────────────
   frogbot-scan-pull-request:
@@ -70,4 +71,5 @@ jobs:
           JF_GIT_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
           JF_GIT_BASE_BRANCH: ${{ github.event.pull_request.base.ref }}
           JFROG_CLI_LOG_LEVEL: DEBUG
+          JF_WATCHES: sss-frogbot-test2
 
