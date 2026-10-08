@@ -6,7 +6,7 @@
 #   pull-requests: write
 #   contents: read
 #   security-events: write
-#   # [Mandatory if using OIDC authentication protocol instead of JF_ACCESS_TOKEN] - Test
+#   # [Mandatory if using OIDC authentication protocol instead of JF_ACCESS_TOKEN] - Test.
 #   # id-token: write
 
 # jobs:
