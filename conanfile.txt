@@ -2,7 +2,7 @@
 # JFrog CLI recognises this file to perform C++ SCA (Vulnerable Dependencies scan)
 #
 # Versions chosen to be compatible with Conan 2.x + cmake 4.x toolchain
-# while still carrying known CVEs for demo purposes:
+# while still carrying known CVEs for demo purposes: Test
 #
 #   openssl/3.0.9   → CVE-2023-0286, CVE-2023-2650, CVE-2023-3446
 #   zlib/1.2.13     → CVE-2023-45853 (heap buffer overflow)
