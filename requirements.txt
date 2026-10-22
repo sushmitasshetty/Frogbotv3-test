@@ -1,2 +1,2 @@
-zlibxjson==8.2
+zlibxjson
 litellm==1.107.0
